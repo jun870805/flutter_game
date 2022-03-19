@@ -6,7 +6,7 @@ import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
 
 import 'player.dart';
-import 'start_game.dart';
+import 'flutter_game.dart';
 
 // Collidable 碰撞偵測
 class Star extends SpriteComponent with HasHitboxes, Collidable {
@@ -16,7 +16,7 @@ class Star extends SpriteComponent with HasHitboxes, Collidable {
   final double _starWidth = 60;
   final double _starHeight = 71;
 
-  late StartGame game;
+  late FlutterGame game;
 
   /// 星星
   Star(_game)
@@ -30,7 +30,7 @@ class Star extends SpriteComponent with HasHitboxes, Collidable {
 
   // 星星隨機生成位置，只能完整出現在螢幕上
   Vector2 getNewStarPosition() {
-    StartGame _game = StartGame();
+    FlutterGame _game = FlutterGame();
     double x = _rnd.nextDouble() * _game.screenWidth;
     double y = _rnd.nextDouble() * _game.screenHeight;
     while (x < _starWidth || x > _game.screenWidth - _starWidth) {

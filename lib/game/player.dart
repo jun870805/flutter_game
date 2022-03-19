@@ -2,11 +2,11 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
 
-import 'start_game.dart';
+import 'flutter_game.dart';
 
 // Collidable 碰撞偵測
 class Player extends SpriteComponent with HasHitboxes, Collidable {
-  late final StartGame _game;
+  late final FlutterGame _game;
   bool _up = false;
   bool _down = false;
   bool _left = false;
@@ -25,7 +25,7 @@ class Player extends SpriteComponent with HasHitboxes, Collidable {
 
   // player 移動速度 (根據分數調整難度)
   double _playerSpeed() {
-    return 150 * (1 + _game.score / 10);
+    return 150 * (1 + _game.score / 50);
   }
 
   @override

@@ -6,6 +6,8 @@
     "Draggables",
     "Hitbox",
     "Hitboxes",
-    "LTWH"
+    "LTWH",
+    "Tappable",
+    "Tappables"
   ]
 }

@@ -1,10 +1,10 @@
 import 'package:flame/components.dart';
-import './start_game.dart';
-import 'dart:async' as time;
+import 'flutter_game.dart';
+import 'dart:async' as async;
 
 class TimeDisplay extends TextBoxComponent {
-  late StartGame game;
-  late int _time;
+  late FlutterGame game;
+  late int time;
 
   /// 計分板
   TimeDisplay(_game)
@@ -18,12 +18,14 @@ class TimeDisplay extends TextBoxComponent {
     game = _game;
   }
 
-  void _timeCountDown() {
-    time.Timer.periodic(
+  void timeCountDown() {
+    async.Timer.periodic(
       const Duration(seconds: 1),
       (timer) {
-        _time--;
-        if (_time <= 0) {
+        time--;
+        if (time <= 0) {
+          game.status = GameStatus.timesUp;
+          game.changeStatus = true;
           timer.cancel();
         }
       },
@@ -33,15 +35,15 @@ class TimeDisplay extends TextBoxComponent {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    _time = 60;
-    _timeCountDown();
+    time = 10;
+    timeCountDown();
     // await redraw();
   }
 
   @override
   void update(double dt) {
-    if (text != _time.toString() && _time >= 0) {
-      text = 'Time : ' + _time.toString();
+    if (text != time.toString() && time >= 0) {
+      text = 'Time : ' + time.toString();
       redraw();
     }
     super.update(dt);

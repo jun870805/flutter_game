@@ -1,11 +1,11 @@
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
-import 'start_game.dart';
+import 'flutter_game.dart';
 
 class Joystick extends JoystickComponent {
   /// 搖桿控制
-  Joystick(StartGame _game)
+  Joystick(FlutterGame _game)
       : super(
           margin: const EdgeInsets.only(left: 20, bottom: 20),
           knob: SpriteComponent(
