@@ -46,18 +46,5 @@ class StartGame extends FlameGame with HasDraggables, HasCollidables {
     final scoreDisplay = ScoreDisplay(this);
 
     addAll([joystick, background, player, star, scoreDisplay]);
-
-    // add(TextComponent(text: score.toString(), position: Vector2(100, 100)));
   }
-
-  // @override
-  // void render(Canvas canvas) {
-  //   if (parent == null) {
-  //     // 計分板
-  //     final scoreDisplay = ScoreDisplay(this);
-
-  //     // scoreDisplay.render(canvas);
-  //     renderTree(canvas);
-  //   }
-  // }
 }

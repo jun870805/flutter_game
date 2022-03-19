@@ -1,4 +1,5 @@
 import 'package:flame/components.dart';
+import 'package:flutter_game/game/player.dart';
 import './start_game.dart';
 
 class ScoreDisplay extends TextBoxComponent {

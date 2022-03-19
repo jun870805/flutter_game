@@ -11,12 +11,10 @@ class Player extends SpriteComponent with HasHitboxes, Collidable {
   bool _down = false;
   bool _left = false;
   bool _right = true;
-  final double ySpeed = 300;
-  final double xSpeed = 300;
-  final JoystickComponent joystick;
+  final JoystickComponent _joystick;
 
   /// 玩家
-  Player(this._game, this.joystick)
+  Player(this._game, this._joystick)
       : super(
           sprite: Sprite(_game.images.fromCache('player.png')),
           size: Vector2(64, 64),
@@ -25,34 +23,39 @@ class Player extends SpriteComponent with HasHitboxes, Collidable {
     addHitbox(HitboxCircle());
   }
 
+  // player 移動速度 (根據分數調整難度)
+  double _playerSpeed() {
+    return 150 * (1 + _game.score / 10);
+  }
+
   @override
   void update(double dt) {
     super.update(dt);
 
     // 自動移動
     if (_up) {
-      y -= dt * ySpeed;
+      y -= dt * _playerSpeed();
     }
     if (_down) {
-      y += dt * ySpeed;
+      y += dt * _playerSpeed();
     }
     if (_left) {
-      x -= dt * xSpeed;
+      x -= dt * _playerSpeed();
     }
     if (_right) {
-      x += dt * xSpeed;
+      x += dt * _playerSpeed();
     }
 
     // 搖桿控制
-    if (!joystick.delta.isZero()) {
+    if (!_joystick.delta.isZero()) {
       //判斷搖桿移動X軸和Y軸哪個多
-      if (joystick.relativeDelta[0].abs() > joystick.relativeDelta[1].abs()) {
+      if (_joystick.relativeDelta[0].abs() > _joystick.relativeDelta[1].abs()) {
         // 手動移動
-        // x += joystick.relativeDelta[0] * xSpeed * dt;
+        // x += joystick.relativeDelta[0] * _xSpeed * dt;
         //判斷向左還向右
         _up = false;
         _down = false;
-        if (joystick.relativeDelta[0] > 0) {
+        if (_joystick.relativeDelta[0] > 0) {
           angle = 0;
           _left = false;
           _right = true;
@@ -63,11 +66,11 @@ class Player extends SpriteComponent with HasHitboxes, Collidable {
         }
       } else {
         // 手動移動
-        // y += joystick.relativeDelta[1] * ySpeed * dt;
+        // y += joystick.relativeDelta[1] * _ySpeed * dt;
         //判斷向上還向下
         _left = false;
         _right = false;
-        if (joystick.relativeDelta[1] > 0) {
+        if (_joystick.relativeDelta[1] > 0) {
           angle = pi / 2;
           _up = false;
           _down = true;
