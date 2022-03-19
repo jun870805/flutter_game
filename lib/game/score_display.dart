@@ -10,7 +10,7 @@ class ScoreDisplay extends TextBoxComponent {
           boxConfig: TextBoxConfig(
             timePerChar: 0.1,
           ),
-          position: Vector2(0, 100),
+          position: Vector2(0, 0),
         ) {
     game = _game;
   }
