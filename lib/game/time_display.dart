@@ -13,7 +13,7 @@ class TimeDisplay extends TextBoxComponent {
             timePerChar: 0.1,
             maxWidth: 120,
           ),
-          position: Vector2(_game.screenWidth - 120, 10),
+          position: Vector2(_game.screenWidth - 120, 100),
         ) {
     game = _game;
   }
