@@ -7,12 +7,13 @@ import 'package:flame/game.dart';
 import 'background.dart';
 import 'joystick.dart';
 import 'player.dart';
-import 'score.dart';
+import 'score_display.dart';
 import 'star.dart';
 
 class StartGame extends FlameGame with HasDraggables, HasCollidables {
   final double screenWidth = MediaQueryData.fromWindow(window).size.width;
   final double screenHeight = MediaQueryData.fromWindow(window).size.height;
+  int score = 0;
 
   static const _assetsImages = [
     'player.png',
@@ -22,6 +23,8 @@ class StartGame extends FlameGame with HasDraggables, HasCollidables {
 
   @override
   Future<void> onLoad() async {
+    super.onLoad();
+
     print("screenWidth:$screenWidth screenHeight:$screenHeight");
 
     // 載入圖片
@@ -40,8 +43,21 @@ class StartGame extends FlameGame with HasDraggables, HasCollidables {
     final star = Star(this);
 
     // 計分板
-    final score = Score('game with flutter');
+    final scoreDisplay = ScoreDisplay(this);
 
-    addAll([joystick, background, score, player, star]);
+    addAll([joystick, background, player, star, scoreDisplay]);
+
+    // add(TextComponent(text: score.toString(), position: Vector2(100, 100)));
   }
+
+  // @override
+  // void render(Canvas canvas) {
+  //   if (parent == null) {
+  //     // 計分板
+  //     final scoreDisplay = ScoreDisplay(this);
+
+  //     // scoreDisplay.render(canvas);
+  //     renderTree(canvas);
+  //   }
+  // }
 }

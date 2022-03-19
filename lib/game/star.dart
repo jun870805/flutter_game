@@ -16,6 +16,8 @@ class Star extends SpriteComponent with HasHitboxes, Collidable {
   final double _starWidth = 60;
   final double _starHeight = 71;
 
+  late StartGame game;
+
   /// 星星
   Star(_game)
       : super(
@@ -23,6 +25,7 @@ class Star extends SpriteComponent with HasHitboxes, Collidable {
         ) {
     position = getNewStarPosition();
     addHitbox(HitboxCircle());
+    game = _game;
   }
 
   // 星星隨機生成位置，只能完整出現在螢幕上
@@ -45,6 +48,7 @@ class Star extends SpriteComponent with HasHitboxes, Collidable {
     if (_collision) {
       position = getNewStarPosition();
       _collision = false;
+      game.score++;
     }
     super.update(dt);
   }

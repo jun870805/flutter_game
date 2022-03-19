@@ -1,20 +1,18 @@
-import 'dart:ui';
-
 import 'package:flame/components.dart';
-import 'package:flame/geometry.dart';
-import 'package:flame/palette.dart';
+import './start_game.dart';
 
-class Score extends TextBoxComponent {
-  int _score = 0;
+class ScoreDisplay extends TextBoxComponent {
+  late StartGame game;
 
   /// 計分板
-  Score(String text)
+  ScoreDisplay(_game)
       : super(
-          text: text,
           boxConfig: TextBoxConfig(
             timePerChar: 0.1,
           ),
-        ) {}
+        ) {
+    game = _game;
+  }
 
   // @override
   // void drawBackground(Canvas c) {
@@ -30,7 +28,10 @@ class Score extends TextBoxComponent {
 
   @override
   void update(double dt) {
-    // text = _score.toString();
+    if (text != game.score.toString()) {
+      text = 'Score : ' + game.score.toString();
+      redraw();
+    }
     super.update(dt);
   }
 }
