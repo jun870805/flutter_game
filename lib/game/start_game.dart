@@ -9,6 +9,7 @@ import 'joystick.dart';
 import 'player.dart';
 import 'score_display.dart';
 import 'star.dart';
+import 'time_display copy.dart';
 
 class StartGame extends FlameGame with HasDraggables, HasCollidables {
   final double screenWidth = MediaQueryData.fromWindow(window).size.width;
@@ -45,6 +46,9 @@ class StartGame extends FlameGame with HasDraggables, HasCollidables {
     // 計分板
     final scoreDisplay = ScoreDisplay(this);
 
-    addAll([joystick, background, player, star, scoreDisplay]);
+    // 倒數計時器
+    final timeDisplay = TimeDisplay(this);
+
+    addAll([joystick, background, player, star, scoreDisplay, timeDisplay]);
   }
 }
