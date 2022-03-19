@@ -7,7 +7,7 @@ class Joystick extends JoystickComponent {
   /// 搖桿控制
   Joystick(FlutterGame _game)
       : super(
-          margin: const EdgeInsets.only(left: 20, bottom: 20),
+          margin: const EdgeInsets.only(right: 20, bottom: 20),
           knob: SpriteComponent(
             sprite: SpriteSheet.fromColumnsAndRows(
               image: _game.images.fromCache('joystick.png'),
