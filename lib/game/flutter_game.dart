@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 
 import 'background.dart';
+import 'ghost.dart';
 import 'joystick.dart';
+import 'lose.dart';
 import 'player.dart';
 import 'score_display.dart';
 import 'star.dart';
@@ -27,6 +29,7 @@ class FlutterGame extends FlameGame
   int score = 0;
 
   static const _assetsImages = [
+    'ghost.png',
     'joystick.png',
     'lose.png',
     'player.png',
@@ -47,12 +50,16 @@ class FlutterGame extends FlameGame
   late Player _player;
   // 星星
   late Star _star;
+  // 鬼
+  late Ghost _ghost;
   // 計分板
   late ScoreDisplay _scoreDisplay;
-  // 星星
+  // 倒數計時器
   late TimeDisplay _timeDisplay;
   // 時間到
   late TimesUp _timesUp;
+  // 時間到
+  late Lose _lose;
 
   @override
   Future<void> onLoad() async {
@@ -66,9 +73,22 @@ class FlutterGame extends FlameGame
     // 背景
     final background = Background(this);
 
-    // 開始遊戲
+    // 開始遊戲(畫面)
     _startGame = StartGame(this);
 
+    // 時間到(畫面)
+    _timesUp = TimesUp(this);
+
+    // 碰到鬼(畫面)
+    _lose = Lose(this);
+
+    // 刷新遊戲使用物件
+    _initGame();
+
+    addAll([background]);
+  }
+
+  void _initGame() {
     // 搖桿控制
     _joystick = Joystick(this);
 
@@ -78,16 +98,14 @@ class FlutterGame extends FlameGame
     // 星星
     _star = Star(this);
 
+    // 鬼
+    _ghost = Ghost(this);
+
     // 計分板
     _scoreDisplay = ScoreDisplay(this);
 
     // 倒數計時器
     _timeDisplay = TimeDisplay(this);
-
-    // 時間到
-    _timesUp = TimesUp(this);
-
-    addAll([background]);
   }
 
   @override
@@ -96,22 +114,32 @@ class FlutterGame extends FlameGame
     if (parent == null) {
       super.updateTree(dt, callOwnUpdate: false);
     }
+    // 遊戲流程設定物件
     if (changeStatus) {
+      // 初始頁
       if (status == GameStatus.start) {
-        removeAll([_scoreDisplay, _timeDisplay, _timesUp]);
+        removeAll([_scoreDisplay, _timeDisplay, _timesUp, _lose]);
         addAll([_startGame]);
       }
+      // 開始遊戲
       if (status == GameStatus.play) {
-        // 刷新數據
-        _scoreDisplay = ScoreDisplay(this);
-        _timeDisplay = TimeDisplay(this);
+        // 刷新遊戲使用物件
+        _initGame();
 
         removeAll([_startGame]);
-        addAll([_joystick, _player, _star, _scoreDisplay, _timeDisplay]);
+        addAll(
+            [_joystick, _player, _star, _ghost, _scoreDisplay, _timeDisplay]);
       }
+      // 時間到
       if (status == GameStatus.timesUp) {
-        removeAll([_startGame, _joystick, _player, _star]);
+        removeAll([_startGame, _joystick, _player, _star, _ghost]);
         addAll([_timesUp]);
+      }
+      // 碰到鬼
+      if (status == GameStatus.lose) {
+        _timeDisplay.time = -1;
+        removeAll([_startGame, _joystick, _player, _star, _ghost]);
+        addAll([_lose]);
       }
       changeStatus = false;
     }

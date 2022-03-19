@@ -23,7 +23,7 @@ class TimeDisplay extends TextBoxComponent {
       const Duration(seconds: 1),
       (timer) {
         time--;
-        if (time <= 0) {
+        if (time == 0) {
           game.status = GameStatus.timesUp;
           game.changeStatus = true;
           timer.cancel();
@@ -35,7 +35,7 @@ class TimeDisplay extends TextBoxComponent {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    time = 10;
+    time = 60;
     timeCountDown();
     // await redraw();
   }

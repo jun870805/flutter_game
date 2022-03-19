@@ -17,15 +17,19 @@ class Background extends RectangleComponent with Tappable {
     game = _game;
   }
 
-  // 遊戲點擊事件流程
   @override
   bool onTapDown(TapDownInfo info) {
+    // 遊戲點擊事件流程
     if (!game.changeStatus) {
       if (game.status == GameStatus.start) {
         game.status = GameStatus.play;
         game.changeStatus = true;
       }
       if (game.status == GameStatus.timesUp) {
+        game.status = GameStatus.start;
+        game.changeStatus = true;
+      }
+      if (game.status == GameStatus.lose) {
         game.status = GameStatus.start;
         game.changeStatus = true;
       }
