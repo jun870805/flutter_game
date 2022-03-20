@@ -5,33 +5,31 @@ import 'flutter_game.dart';
 import 'dart:ui';
 
 class Background extends RectangleComponent with Tappable {
-  late FlutterGame game;
+  late final FlutterGame _game;
 
   /// 背景
-  Background(FlutterGame _game)
+  Background(this._game)
       : super(
           size: Vector2(_game.screenHeight, _game.screenHeight),
           position: Vector2(0, 0),
           paint: BasicPalette.black.paint()..style = PaintingStyle.fill,
-        ) {
-    game = _game;
-  }
+        );
 
   @override
   bool onTapDown(TapDownInfo info) {
     // 遊戲點擊事件流程
-    if (!game.changeStatus) {
-      if (game.status == GameStatus.start) {
-        game.status = GameStatus.play;
-        game.changeStatus = true;
+    if (!_game.changeStatus) {
+      if (_game.status == GameStatus.start) {
+        _game.status = GameStatus.play;
+        _game.changeStatus = true;
       }
-      if (game.status == GameStatus.timesUp) {
-        game.status = GameStatus.start;
-        game.changeStatus = true;
+      if (_game.status == GameStatus.timesUp) {
+        _game.status = GameStatus.start;
+        _game.changeStatus = true;
       }
-      if (game.status == GameStatus.lose) {
-        game.status = GameStatus.start;
-        game.changeStatus = true;
+      if (_game.status == GameStatus.lose) {
+        _game.status = GameStatus.start;
+        _game.changeStatus = true;
       }
     }
     return true;

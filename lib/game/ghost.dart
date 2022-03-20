@@ -17,17 +17,16 @@ class Ghost extends SpriteComponent with HasHitboxes, Collidable {
   final double _ghostWidth = 64;
   final double _ghostHeight = 64;
 
-  late FlutterGame game;
+  late final FlutterGame _game;
 
   /// 星星
-  Ghost(_game)
+  Ghost(this._game)
       : super(
           sprite: Sprite(_game.images.fromCache('ghost.png')),
           size: Vector2(64, 64),
         ) {
     position = getNewStarPosition();
     addHitbox(HitboxCircle());
-    game = _game;
   }
 
   // 星星隨機生成位置，只能完整出現在螢幕上
@@ -48,8 +47,8 @@ class Ghost extends SpriteComponent with HasHitboxes, Collidable {
   @override
   void update(double dt) {
     if (_collision) {
-      game.status = GameStatus.lose;
-      game.changeStatus = true;
+      _game.status = GameStatus.lose;
+      _game.changeStatus = true;
     }
     super.update(dt);
   }

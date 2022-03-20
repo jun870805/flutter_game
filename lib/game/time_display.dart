@@ -3,20 +3,19 @@ import 'flutter_game.dart';
 import 'dart:async' as async;
 
 class TimeDisplay extends TextBoxComponent {
-  late FlutterGame game;
+  late final FlutterGame _game;
   late int time;
 
   /// 計分板
-  TimeDisplay(_game)
+  TimeDisplay(this._game)
       : super(
           boxConfig: TextBoxConfig(
             timePerChar: 0.1,
             maxWidth: 120,
           ),
-          position: Vector2(_game.screenWidth - 120, 0),
-        ) {
-    game = _game;
-  }
+          position: Vector2(
+              _game.screenWidth / 2 - 60, _game.screenHeight * (1 / 10)),
+        );
 
   void timeCountDown() {
     async.Timer.periodic(
@@ -24,8 +23,8 @@ class TimeDisplay extends TextBoxComponent {
       (timer) {
         time--;
         if (time == 0) {
-          game.status = GameStatus.timesUp;
-          game.changeStatus = true;
+          _game.status = GameStatus.timesUp;
+          _game.changeStatus = true;
           timer.cancel();
         }
       },

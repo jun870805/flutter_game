@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'flutter_game.dart';
 
 class Joystick extends JoystickComponent {
+  late final FlutterGame _game;
+
   /// 搖桿控制
-  Joystick(FlutterGame _game)
+  Joystick(this._game)
       : super(
           margin: const EdgeInsets.only(right: 20, bottom: 20),
           knob: SpriteComponent(
