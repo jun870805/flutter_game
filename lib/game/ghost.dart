@@ -31,12 +31,10 @@ class Ghost extends SpriteComponent with HasHitboxes, Collidable {
 
   // 星星隨機生成位置，只能完整出現在螢幕上
   Vector2 getNewStarPosition() {
-    FlutterGame _game = FlutterGame();
     double x = _rnd.nextDouble() * _game.screenWidth;
     double y = _rnd.nextDouble() * _game.screenHeight;
     while (x < _ghostWidth || x > _game.screenWidth - _ghostWidth) {
       x = _rnd.nextDouble() * _game.screenWidth;
-      print(x);
     }
     while (y < _ghostHeight || y > _game.screenHeight - _ghostHeight) {
       y = _rnd.nextDouble() * _game.screenHeight;

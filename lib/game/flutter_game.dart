@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
+import 'package:flutter/services.dart';
 
 import 'background.dart';
 import 'ghost.dart';
@@ -64,6 +66,11 @@ class FlutterGame extends FlameGame
   @override
   Future<void> onLoad() async {
     super.onLoad();
+
+    await Flame.device.setOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
 
     print("screenWidth:$screenWidth screenHeight:$screenHeight");
 
