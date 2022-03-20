@@ -12,7 +12,7 @@ class ScoreDisplay extends TextBoxComponent {
             maxWidth: 140,
           ),
           position: Vector2(
-              _game.screenWidth / 2 - 70, _game.screenHeight * (2 / 10)),
+              _game.screenWidth / 2 - 60, _game.screenHeight * (2 / 10)),
         );
 
   @override
