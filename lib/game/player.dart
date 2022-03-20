@@ -25,7 +25,7 @@ class Player extends SpriteComponent with HasHitboxes, Collidable {
 
   // player 移動速度 (根據分數調整難度)
   double _playerSpeed() {
-    return 50 * (1 + _game.score / 50);
+    return 150 * (1 + _game.score / 50);
   }
 
   @override
