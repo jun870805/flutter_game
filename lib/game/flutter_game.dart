@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
+import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/services.dart';
@@ -93,6 +94,15 @@ class FlutterGame extends FlameGame
     _initGame();
 
     addAll([background]);
+
+    final style = TextStyle(color: BasicPalette.white.color);
+    final regular = TextPaint(style: style);
+    add(
+      TextComponent(text: 'version:0.0.13', textRenderer: regular)
+        ..anchor = Anchor.topCenter
+        ..x = screenWidth / 2
+        ..y = screenHeight - 32.0,
+    );
   }
 
   void _initGame() {
@@ -110,6 +120,7 @@ class FlutterGame extends FlameGame
 
     // 計分板
     _scoreDisplay = ScoreDisplay(this);
+    score = 0;
 
     // 倒數計時器
     _timeDisplay = TimeDisplay(this);
