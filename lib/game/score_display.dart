@@ -16,9 +16,18 @@ class ScoreDisplay extends TextBoxComponent {
         );
 
   @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+    // 遊戲分數初始化
+    _game.score = 0;
+  }
+
+  @override
   void update(double dt) {
+    // 當分數變動時
     if (text != _game.score.toString()) {
       text = 'Score : ' + _game.score.toString();
+      // 重新繪製分數物件
       redraw();
     }
     super.update(dt);

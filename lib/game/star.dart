@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
+import 'package:flutter_game/game/ghost.dart';
 
 import 'player.dart';
 import 'flutter_game.dart';
@@ -44,8 +45,10 @@ class Star extends SpriteComponent with HasHitboxes, Collidable {
   @override
   void update(double dt) {
     if (_collision) {
+      // 星星變換新位置
       position = getNewStarPosition();
       _collision = false;
+      // 分數 +1
       _game.score++;
     }
     super.update(dt);
@@ -54,7 +57,11 @@ class Star extends SpriteComponent with HasHitboxes, Collidable {
   @override
   void onCollision(Set<Vector2> intersectionPoints, Collidable other) {
     super.onCollision(intersectionPoints, other);
-    // 玩家吃到星星
+    // 鬼跟星星不能同位置
+    if (other is Ghost) {
+      getNewStarPosition();
+    }
+    // 當玩家與星星產生接觸
     if (other is Player) {
       _collision = true;
     }

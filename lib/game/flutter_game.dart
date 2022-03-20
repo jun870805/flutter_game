@@ -31,6 +31,7 @@ class FlutterGame extends FlameGame
   final double screenHeight = MediaQueryData.fromWindow(window).size.height;
   int score = 0;
 
+  // 載入圖片
   static const _assetsImages = [
     'ghost.png',
     'joystick.png',
@@ -68,6 +69,8 @@ class FlutterGame extends FlameGame
   Future<void> onLoad() async {
     super.onLoad();
 
+    // 設定全屏 及 橫向顯示
+    await Flame.device.fullScreen();
     await Flame.device.setOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
@@ -120,7 +123,6 @@ class FlutterGame extends FlameGame
 
     // 計分板
     _scoreDisplay = ScoreDisplay(this);
-    score = 0;
 
     // 倒數計時器
     _timeDisplay = TimeDisplay(this);
@@ -134,12 +136,12 @@ class FlutterGame extends FlameGame
     }
     // 遊戲流程設定物件
     if (changeStatus) {
-      // 初始頁
+      // 開始頁
       if (status == GameStatus.start) {
         removeAll([_scoreDisplay, _timeDisplay, _timesUp, _lose]);
         addAll([_startGame]);
       }
-      // 開始遊戲
+      // 遊戲中
       if (status == GameStatus.play) {
         // 刷新遊戲使用物件
         _initGame();

@@ -4,7 +4,7 @@ import 'flutter_game.dart';
 class StartGame extends SpriteComponent {
   late final FlutterGame _game;
 
-  /// 開始按鈕
+  /// 開始
   StartGame(this._game)
       : super(
           sprite: Sprite(_game.images.fromCache('start.png')),

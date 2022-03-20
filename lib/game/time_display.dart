@@ -18,10 +18,12 @@ class TimeDisplay extends TextBoxComponent {
         );
 
   void timeCountDown() {
+    // 每一秒減一
     async.Timer.periodic(
       const Duration(seconds: 1),
       (timer) {
         time--;
+        // 秒數歸0時，改變為時間到的狀態
         if (time == 0) {
           _game.status = GameStatus.timesUp;
           _game.changeStatus = true;
@@ -34,13 +36,14 @@ class TimeDisplay extends TextBoxComponent {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+    // 遊戲時間初始化
     time = 60;
     timeCountDown();
-    // await redraw();
   }
 
   @override
   void update(double dt) {
+    // 更新秒數
     if (text != time.toString() && time >= 0) {
       text = 'Time : ' + time.toString();
       redraw();

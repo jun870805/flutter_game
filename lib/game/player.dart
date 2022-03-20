@@ -48,11 +48,11 @@ class Player extends SpriteComponent with HasHitboxes, Collidable {
 
     // 搖桿控制
     if (!_joystick.delta.isZero()) {
-      //判斷搖桿移動X軸和Y軸哪個多
+      // 判斷搖桿移動X軸和Y軸哪個多
       if (_joystick.relativeDelta[0].abs() > _joystick.relativeDelta[1].abs()) {
         // 手動移動
         // x += joystick.relativeDelta[0] * _xSpeed * dt;
-        //判斷向左還向右
+        // 判斷向左還向右
         _up = false;
         _down = false;
         if (_joystick.relativeDelta[0] > 0) {
@@ -67,7 +67,7 @@ class Player extends SpriteComponent with HasHitboxes, Collidable {
       } else {
         // 手動移動
         // y += joystick.relativeDelta[1] * _ySpeed * dt;
-        //判斷向上還向下
+        // 判斷向上還向下
         _left = false;
         _right = false;
         if (_joystick.relativeDelta[1] > 0) {
@@ -82,19 +82,20 @@ class Player extends SpriteComponent with HasHitboxes, Collidable {
       }
     }
 
-    // 左方邊緣碰撞
+    // 邊緣碰觸事件
+    // 左方邊緣
     if (x < 32) {
       x = _game.screenWidth - 32;
     }
-    // 右方邊緣碰撞
+    // 右方邊緣
     if (x > _game.screenWidth - 32) {
       x = 32;
     }
-    // 上方邊緣碰撞
+    // 上方邊緣
     if (y < 32) {
       y = _game.screenHeight - 32;
     }
-    // 下方邊緣碰撞
+    // 下方邊緣
     if (y > _game.screenHeight - 32) {
       y = 32;
     }
