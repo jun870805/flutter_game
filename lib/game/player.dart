@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
+import 'package:flutter/services.dart';
 
 import 'flutter_game.dart';
 
@@ -98,6 +99,38 @@ class Player extends SpriteComponent with HasHitboxes, Collidable {
     // 下方邊緣
     if (y > _game.screenHeight - 32) {
       y = 32;
+    }
+
+    // 鍵盤事件
+    if (_game.keyboard != null) {
+      if (_game.keyboard == LogicalKeyboardKey.arrowDown) {
+        _left = false;
+        _right = false;
+        _up = false;
+        _down = true;
+        angle = pi / 2;
+      }
+      if (_game.keyboard == LogicalKeyboardKey.arrowUp) {
+        _left = false;
+        _right = false;
+        _up = true;
+        _down = false;
+        angle = pi * 3 / 2;
+      }
+      if (_game.keyboard == LogicalKeyboardKey.arrowLeft) {
+        _left = true;
+        _right = false;
+        _up = false;
+        _down = false;
+        angle = pi;
+      }
+      if (_game.keyboard == LogicalKeyboardKey.arrowRight) {
+        _left = false;
+        _right = true;
+        _up = false;
+        _down = false;
+        angle = 0;
+      }
     }
   }
 }

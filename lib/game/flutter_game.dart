@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
+import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
@@ -26,10 +27,11 @@ enum GameStatus {
 }
 
 class FlutterGame extends FlameGame
-    with HasDraggables, HasCollidables, HasTappables {
+    with HasDraggables, HasCollidables, HasTappables, KeyboardEvents {
   final double screenWidth = MediaQueryData.fromWindow(window).size.width;
   final double screenHeight = MediaQueryData.fromWindow(window).size.height;
   int score = 0;
+  LogicalKeyboardKey? keyboard;
 
   // 載入圖片
   static const _assetsImages = [
@@ -101,7 +103,7 @@ class FlutterGame extends FlameGame
     final style = TextStyle(color: BasicPalette.white.color);
     final regular = TextPaint(style: style);
     add(
-      TextComponent(text: 'version:0.0.13', textRenderer: regular)
+      TextComponent(text: 'version:0.0.14', textRenderer: regular)
         ..anchor = Anchor.topCenter
         ..x = screenWidth / 2
         ..y = screenHeight - 32.0,
@@ -163,5 +165,26 @@ class FlutterGame extends FlameGame
       }
       changeStatus = false;
     }
+  }
+
+  @override
+  KeyEventResult onKeyEvent(
+    RawKeyEvent event,
+    Set<LogicalKeyboardKey> keysPressed,
+  ) {
+    if (keysPressed.contains(LogicalKeyboardKey.arrowDown)) {
+      keyboard = LogicalKeyboardKey.arrowDown;
+    }
+    if (keysPressed.contains(LogicalKeyboardKey.arrowUp)) {
+      keyboard = LogicalKeyboardKey.arrowUp;
+    }
+    if (keysPressed.contains(LogicalKeyboardKey.arrowLeft)) {
+      keyboard = LogicalKeyboardKey.arrowLeft;
+    }
+    if (keysPressed.contains(LogicalKeyboardKey.arrowRight)) {
+      keyboard = LogicalKeyboardKey.arrowRight;
+    }
+
+    return KeyEventResult.ignored;
   }
 }
