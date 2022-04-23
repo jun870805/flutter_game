@@ -1,11 +1,11 @@
 import 'package:flame/components.dart';
 import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
-import 'flutter_game.dart';
+import 'game.dart';
 import 'dart:ui';
 
 class Background extends RectangleComponent with Tappable {
-  late final FlutterGame _game;
+  late final DoodleGame _game;
 
   /// 背景
   Background(this._game)

@@ -25,7 +25,7 @@ enum GameStatus {
   timesUp,
 }
 
-class FlutterGame extends FlameGame
+class DoodleGame extends FlameGame
     with HasDraggables, HasCollidables, HasTappables, KeyboardEvents {
   final double screenWidth = MediaQueryData.fromWindow(window).size.width;
   final double screenHeight = MediaQueryData.fromWindow(window).size.height;

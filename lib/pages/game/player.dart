@@ -3,11 +3,11 @@ import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
 import 'package:flutter/services.dart';
 
-import 'flutter_game.dart';
+import 'game.dart';
 
 // Collidable 碰撞偵測
 class Player extends SpriteComponent with HasHitboxes, Collidable {
-  late final FlutterGame _game;
+  late final DoodleGame _game;
   bool _up = false;
   bool _down = false;
   bool _left = false;

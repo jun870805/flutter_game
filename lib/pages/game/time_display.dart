@@ -1,9 +1,9 @@
 import 'package:flame/components.dart';
-import 'flutter_game.dart';
+import 'game.dart';
 import 'dart:async' as async;
 
 class TimeDisplay extends TextBoxComponent {
-  late final FlutterGame _game;
+  late final DoodleGame _game;
   late int time;
 
   /// 計分板

@@ -1,10 +1,10 @@
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
-import 'flutter_game.dart';
+import 'game.dart';
 
 class Joystick extends JoystickComponent {
-  late final FlutterGame _game;
+  late final DoodleGame _game;
 
   /// 搖桿控制
   Joystick(this._game)

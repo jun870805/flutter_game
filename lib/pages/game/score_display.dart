@@ -1,8 +1,8 @@
 import 'package:flame/components.dart';
-import 'flutter_game.dart';
+import 'game.dart';
 
 class ScoreDisplay extends TextBoxComponent {
-  late final FlutterGame _game;
+  late final DoodleGame _game;
 
   /// 計分板
   ScoreDisplay(this._game)

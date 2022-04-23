@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import 'package:flame/flame.dart';
 
-import 'game/flutter_game.dart';
+import './includes.dart';
 
 class StarsApp extends StatelessWidget {
   const StarsApp({Key? key}) : super(key: key);
@@ -13,7 +13,11 @@ class StarsApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Game',
       theme: ThemeData.dark(),
-      home: Scaffold(body: GameWidget(game: FlutterGame())),
+      home: Scaffold(
+        body: GameWidget(
+          game: DoodleGame(),
+        ),
+      ),
     );
   }
 }

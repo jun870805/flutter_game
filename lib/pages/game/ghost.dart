@@ -4,26 +4,26 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
-import 'package:flutter_game/game/ghost.dart';
 
 import 'player.dart';
-import 'flutter_game.dart';
+import 'game.dart';
+import 'star.dart';
 
 // Collidable 碰撞偵測
-class Star extends SpriteComponent with HasHitboxes, Collidable {
+class Ghost extends SpriteComponent with HasHitboxes, Collidable {
   final Random _rnd = Random();
   bool _collision = false;
 
-  final double _starWidth = 60;
-  final double _starHeight = 71;
+  final double _ghostWidth = 64;
+  final double _ghostHeight = 64;
 
-  late final FlutterGame _game;
+  late final DoodleGame _game;
 
   /// 星星
-  Star(this._game)
+  Ghost(this._game)
       : super(
-          sprite: Sprite(_game.images.fromCache('star.png')),
-          size: Vector2(60, 71),
+          sprite: Sprite(_game.images.fromCache('ghost.png')),
+          size: Vector2(64, 64),
         ) {
     position = getNewStarPosition();
     addHitbox(HitboxCircle());
@@ -33,10 +33,10 @@ class Star extends SpriteComponent with HasHitboxes, Collidable {
   Vector2 getNewStarPosition() {
     double x = _rnd.nextDouble() * _game.screenWidth;
     double y = _rnd.nextDouble() * _game.screenHeight;
-    while (x < _starWidth || x > _game.screenWidth - _starWidth) {
+    while (x < _ghostWidth || x > _game.screenWidth - _ghostWidth) {
       x = _rnd.nextDouble() * _game.screenWidth;
     }
-    while (y < _starHeight || y > _game.screenHeight - _starHeight) {
+    while (y < _ghostHeight || y > _game.screenHeight - _ghostHeight) {
       y = _rnd.nextDouble() * _game.screenHeight;
     }
     return Vector2(x, y);
@@ -45,11 +45,8 @@ class Star extends SpriteComponent with HasHitboxes, Collidable {
   @override
   void update(double dt) {
     if (_collision) {
-      // 星星變換新位置
-      position = getNewStarPosition();
-      _collision = false;
-      // 分數 +1
-      _game.score++;
+      _game.status = GameStatus.lose;
+      _game.changeStatus = true;
     }
     super.update(dt);
   }
@@ -58,10 +55,10 @@ class Star extends SpriteComponent with HasHitboxes, Collidable {
   void onCollision(Set<Vector2> intersectionPoints, Collidable other) {
     super.onCollision(intersectionPoints, other);
     // 鬼跟星星不能同位置
-    if (other is Ghost) {
+    if (other is Star) {
       getNewStarPosition();
     }
-    // 當玩家與星星產生接觸
+    // 玩家撞到鬼
     if (other is Player) {
       _collision = true;
     }
