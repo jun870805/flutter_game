@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'game.dart';
+import 'doodle_game.dart';
 
 class ScoreDisplay extends TextBoxComponent {
   late final DoodleGame _game;

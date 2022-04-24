@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'game.dart';
+import 'doodle_game.dart';
 import 'dart:async' as async;
 
 class TimeDisplay extends TextBoxComponent {

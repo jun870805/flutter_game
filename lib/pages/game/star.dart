@@ -7,7 +7,7 @@ import 'package:flame/geometry.dart';
 import './ghost.dart';
 
 import 'player.dart';
-import 'game.dart';
+import 'doodle_game.dart';
 
 // Collidable 碰撞偵測
 class Star extends SpriteComponent with HasHitboxes, Collidable {

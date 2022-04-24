@@ -6,7 +6,7 @@ import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
 
 import 'player.dart';
-import 'game.dart';
+import 'doodle_game.dart';
 import 'star.dart';
 
 // Collidable 碰撞偵測

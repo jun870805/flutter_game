@@ -1,6 +1,6 @@
 import 'package:flame/components.dart';
 
-import 'game.dart';
+import 'doodle_game.dart';
 
 class Lose extends SpriteComponent {
   late final DoodleGame _game;

@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/input.dart';
 import 'package:flame/palette.dart';
-import 'game.dart';
+import 'doodle_game.dart';
 import 'dart:ui';
 
 class Background extends RectangleComponent with Tappable {
