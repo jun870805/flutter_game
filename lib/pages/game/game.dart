@@ -20,10 +20,8 @@ class _GamePageState extends State<GamePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GameWidget(
-        game: DoodleGame(),
-      ),
+    return GameWidget(
+      game: DoodleGame(),
     );
   }
 }
