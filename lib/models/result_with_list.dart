@@ -1,39 +1,35 @@
 import 'dart:convert';
 
-class Result<T> {
+class ResultWithList<T> {
   bool? success;
   int? code;
   String? msg;
-  T? data;
+  List<T>? data;
 
-  Result({
+  ResultWithList({
     this.success,
     this.code,
     this.msg,
     this.data,
   });
 
-  factory Result.empty() {
-    return Result<T>(
-      success: false,
-      data: null,
+  factory ResultWithList.empty() {
+    return ResultWithList<T>(
+      data: [],
     );
   }
 
-  factory Result.fromJson(
+  factory ResultWithList.fromJson(
     Map<String, dynamic> json, {
-    T Function(Map<String, dynamic> json)? convert,
+    T Function(dynamic json)? convert,
   }) {
-    T? data;
-    if (json['data'] != null) {
-      if (convert != null) {
-        data = convert(json['data']);
-      } else {
-        data = json['data'];
-      }
+    List<T> data = [];
+    if (json['data'] != null && convert != null) {
+      Iterable l = json['data'] as List;
+      data = l.map((item) => convert(item)).toList();
     }
 
-    return Result(
+    return ResultWithList(
       success: json['success'] ?? json['code'] == 1,
       code: json['code'],
       msg: json['msg'],
