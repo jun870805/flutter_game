@@ -5,5 +5,5 @@ import './includes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(const GamePage());
+  runApp(const HomePage());
 }

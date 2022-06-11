@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 class Result<T> {
-  bool? success;
+  bool success;
   int? code;
   String? msg;
   T? data;
 
   Result({
-    this.success,
+    this.success = false,
     this.code,
     this.msg,
     this.data,

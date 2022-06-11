@@ -62,7 +62,6 @@ class PrettyDioLogger extends Interceptor {
       _printMapAsTable(options.queryParameters, header: 'Query Parameters');
       final requestHeaders = {};
       requestHeaders.addAll(options.headers);
-      requestHeaders['contentType'] = options.contentType?.toString();
       requestHeaders['responseType'] = options.responseType.toString();
       requestHeaders['followRedirects'] = options.followRedirects;
       requestHeaders['connectTimeout'] = options.connectTimeout;
@@ -173,7 +172,7 @@ class PrettyDioLogger extends Interceptor {
 
   void _printLine([String pre = '']) => logPrint('$pre${'═' * maxWidth}');
 
-  void _printKV(String key, Object v) {
+  void _printKV(String key, Object? v) {
     final pre = '╟ $key: ';
     final msg = v.toString();
 

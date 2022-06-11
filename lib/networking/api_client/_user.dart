@@ -23,7 +23,7 @@ class UserService {
       response.data,
       convert: (d) => User.fromJson(d),
     );
-    if (d.success && d.data != null) {
+    if (d.success != null && d.data != null) {
       User? user = d.data;
       // await sharedConfig.update(
       //   userId: user!.id.toString(),
