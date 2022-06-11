@@ -16,10 +16,9 @@ class TokenService {
 
     print(response);
 
-    var d = Result<AppToken>.fromJson(
+    return Result<AppToken>.fromJson(
       response.data,
       convert: (j) => AppToken.fromJson(j),
     );
-    return d;
   }
 }

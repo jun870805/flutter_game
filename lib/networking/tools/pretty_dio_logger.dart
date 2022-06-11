@@ -81,7 +81,7 @@ class PrettyDioLogger extends Interceptor {
         }
       }
     }
-
+    handler.next(options);
     return options;
   }
 
@@ -107,6 +107,7 @@ class PrettyDioLogger extends Interceptor {
         _printBoxed(header: 'DioError ║ ${err.type}', text: err.message);
       }
     }
+    handler.next(err);
     return err;
   }
 
@@ -130,7 +131,7 @@ class PrettyDioLogger extends Interceptor {
       logPrint('║');
       _printLine('╚');
     }
-
+    handler.next(response);
     return response;
   }
 

@@ -17,14 +17,14 @@ class ApiClient {
     _isUseUserId = false;
   }
 
-  ApiClient({String? url}) {
+  ApiClient() {
     BaseOptions options = BaseOptions(
-      baseUrl: url ?? 'https://side-game.herokuapp.com/',
+      baseUrl: 'https://side-game.herokuapp.com/',
       connectTimeout: 100000,
       receiveTimeout: 100000,
       headers: {
         "Accept": "application/json",
-        "Content-Type": "application/json",
+        // " Content-Type": "application/json",
       },
       responseType: ResponseType.json,
     );
@@ -45,7 +45,7 @@ class ApiClient {
           //   String msg = response.data['msg'];
 
           // }
-          handler.resolve(response);
+          handler.next(response);
         },
         onError: (DioError e, ErrorInterceptorHandler handler) {
           switch (e.type) {
