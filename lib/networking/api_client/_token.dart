@@ -16,6 +16,10 @@ class TokenService {
 
     print(response);
 
+    await sharedConfig.updateAccessToken(
+      accessToken: response.data['X-CSRFToken'],
+    );
+
     return Result<AppToken>.fromJson(
       response.data,
       convert: (j) => AppToken.fromJson(j),

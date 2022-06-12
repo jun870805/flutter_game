@@ -26,7 +26,12 @@ class ApiClient {
 
     _http.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
+        onRequest:
+            (RequestOptions options, RequestInterceptorHandler handler) async {
+          String? accessToken = await sharedConfig.getCsrfToken();
+          if ((accessToken ?? '').isNotEmpty) {
+            options.headers['X-CSRFToken'] = accessToken;
+          }
           handler.next(options);
         },
         onResponse: (Response response, ResponseInterceptorHandler handler) {
