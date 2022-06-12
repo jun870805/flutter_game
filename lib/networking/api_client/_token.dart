@@ -14,15 +14,18 @@ class TokenService {
       '/GetCsrf',
     );
 
-    print(response);
-
-    await sharedConfig.updateAccessToken(
-      accessToken: response.data['X-CSRFToken'],
-    );
-
-    return Result<AppToken>.fromJson(
+    Result<AppToken> d = Result<AppToken>.fromJson(
       response.data,
       convert: (j) => AppToken.fromJson(j),
     );
+
+    if (d.success && d.data != null) {
+      AppToken? appToken = d.data;
+      await sharedConfig.updateAccessToken(
+        accessToken: appToken!.token.toString(),
+      );
+    }
+
+    return d;
   }
 }

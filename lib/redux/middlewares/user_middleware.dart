@@ -24,15 +24,15 @@ Middleware<AppState> _createUserLogInMiddleware() {
       );
 
       // 登入成功後取得資料
-      if (userLoginResult.success) {
-        userCenterResult = await sharedApiClient.user.userCenter();
-        user = userCenterResult.data;
-      } else {
-        throw Exception(userLoginResult.msg);
-      }
+      // if (userLoginResult.success) {
+      //   userCenterResult = await sharedApiClient.user.userCenter();
+      //   user = userCenterResult.data;
+      // } else {
+      //   throw Exception(userLoginResult.msg);
+      // }
 
-      action.result = userCenterResult;
-      action.user = user;
+      // action.result = userCenterResult;
+      // action.user = user;
       next(action);
 
       action.completer.complete(userLoginResult);
@@ -47,19 +47,19 @@ Middleware<AppState> _createUserLogOutMiddleware() {
     if (action is! UserLogoutAction) return;
 
     try {
-      Result<dynamic> userLogoutResult;
-      try {
-        userLogoutResult = await sharedApiClient.user.logout();
-      } catch (e) {
-        throw Exception(e);
-      }
+      // Result<dynamic> userLogoutResult;
+      // try {
+      //   userLogoutResult = await sharedApiClient.user.logout();
+      // } catch (e) {
+      //   throw Exception(e);
+      // }
 
-      action.result = userLogoutResult;
+      // action.result = userLogoutResult;
       next(action);
 
       store.dispatch(ResetAppStateAction());
 
-      action.completer.complete(userLogoutResult);
+      // action.completer.complete(userLogoutResult);
     } catch (error) {
       action.completer.completeError(error);
     }

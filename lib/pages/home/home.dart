@@ -17,8 +17,6 @@ class _HomePageState extends State<HomePage> {
 
       // if (!mounted) return Result<AppToken>.empty();
       if (!result.success) throw Exception(result.msg);
-
-      print(result);
     } catch (error) {
       print(error);
     }

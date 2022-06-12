@@ -121,17 +121,21 @@ class Config {
   Future updateUserId({
     String? userId,
   }) async {
-    await _setString('user_id', userId);
+    await _setString('uid', userId);
+  }
+
+  Future<String?> getUserId() async {
+    return await _getString('uid');
   }
 
   Future updateAccessToken({
     String? accessToken,
   }) async {
-    await _setString('user_id', accessToken);
+    await _setString('access_token', accessToken);
   }
 
-  Future<String?> getUserId() async {
-    return await _getString('user_id');
+  Future<String?> getCsrfToken() async {
+    return await _getString('access_token');
   }
 
   Future<bool> _setString(String key, String? value) async {
@@ -158,8 +162,4 @@ class Config {
   }
 
   late Store<AppState> store;
-
-  Future<String?> getCsrfToken() async {
-    return await _getString('access_token');
-  }
 }

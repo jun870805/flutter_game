@@ -8,10 +8,37 @@ class UserService {
 
   UserService(this._http);
 
+  // 註冊
+  Future<Result> signUp({
+    required String username,
+    required String password,
+  }) async {
+    Map<String, dynamic> _parm = {};
+
+    _parm['username'] = username;
+    _parm['password'] = password;
+
+    final response = await _http.post(
+      '/signup',
+      data: {
+        'username': username,
+        'password': password,
+      },
+    );
+
+    return Result.fromJson(response.data);
+  }
+
+  // 登入
   Future<Result<User>> login({
     required String username,
     required String password,
   }) async {
+    Map<String, dynamic> _parm = {};
+
+    _parm['username'] = username;
+    _parm['password'] = password;
+
     final response = await _http.post(
       '/login',
       data: {
@@ -19,40 +46,26 @@ class UserService {
         'password': password,
       },
     );
-    var d = Result.fromJson(
-      response.data,
-      convert: (d) => User.fromJson(d),
-    );
-    if (d.success != null && d.data != null) {
-      User? user = d.data;
-      // await sharedConfig.update(
-      //   userId: user!.id.toString(),
-      // );
-    }
-    return d;
-  }
 
-  Future<Result<User>> userCenter() async {
-    final response = await _http.get(
-      '/user',
-    );
-
-    var d = Result<User>.fromJson(
+    Result<User> d = Result<User>.fromJson(
       response.data,
       convert: (j) => User.fromJson(j),
     );
+
+    if (d.success && d.data != null) {
+      User? user = d.data;
+      await sharedConfig.updateUserId(
+        userId: user!.id.toString(),
+      );
+    }
+
     return d;
   }
 
-  Future<Result> logout() async {
-    final response = await _http.post('/user/logout');
+  // 登出
+  Future<Result<User>> logOut() async {
+    final response = await _http.get('/logout');
 
-    // await sharedConfig.update(
-    //   userId: null,
-    // );
-
-    Result r = Result.fromJson(response.data);
-
-    return r;
+    return Result.fromJson(response.data);
   }
 }

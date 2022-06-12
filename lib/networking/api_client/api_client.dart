@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_game/networking/api_client/_record.dart';
 
 import '../../includes.dart';
 import './_token.dart';
@@ -10,6 +11,7 @@ class ApiClient {
 
   late Dio _http;
   late TokenService _tokenService;
+  late RecordService _recordService;
   late UserService _userService;
 
   ApiClient() {
@@ -72,6 +74,7 @@ class ApiClient {
     ));
 
     _tokenService = TokenService(_http);
+    _recordService = RecordService(_http);
     _userService = UserService(_http);
   }
 
@@ -83,29 +86,29 @@ class ApiClient {
 
   TokenService get token => _tokenService;
 
+  RecordService get record => _recordService;
+
   UserService get user => _userService;
 
   String get networkErrorMessage {
-    // LocalizedString initialUrl = LocalizedString.fromJson({
-    //   'localizedMap': {
-    //     'en': 'Request failed,  please try again later.',
-    //     'tw': '網路請求失敗，請稍後重試。',
-    //   }
-    // });
+    LocalizedString initialUrl = LocalizedString.fromJson({
+      'localizedMap': {
+        'en': 'Request failed,  please try again later.',
+        'tw': '網路請求失敗，請稍後重試。',
+      }
+    });
 
-    // return initialUrl.toString();
-    return 'Request failed,  please try again later.';
+    return initialUrl.toString();
   }
 
   String get networkTimeOutMessage {
-    // LocalizedString initialUrl = LocalizedString.fromJson({
-    //   'localizedMap': {
-    //     'en': 'Request time out, please try again later.',
-    //     'tw': '網路請求超時，請稍後重試。',
-    //   }
-    // });
+    LocalizedString initialUrl = LocalizedString.fromJson({
+      'localizedMap': {
+        'en': 'Request time out, please try again later.',
+        'tw': '網路請求超時，請稍後重試。',
+      }
+    });
 
-    // return initialUrl.toString();
-    return 'Request time out, please try again later.';
+    return initialUrl.toString();
   }
 }
