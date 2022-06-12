@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  devicelocale
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

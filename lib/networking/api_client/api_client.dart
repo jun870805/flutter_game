@@ -11,20 +11,14 @@ class ApiClient {
   late Dio _http;
   late TokenService _tokenService;
   late UserService _userService;
-  bool _isUseUserId = true;
-
-  void noUseUserId() {
-    _isUseUserId = false;
-  }
 
   ApiClient() {
     BaseOptions options = BaseOptions(
-      baseUrl: 'https://side-game.herokuapp.com/',
-      connectTimeout: 100000,
-      receiveTimeout: 100000,
+      baseUrl: sharedConfig.apiUrl,
+      connectTimeout: 60000,
+      receiveTimeout: 60000,
       headers: {
         "Accept": "application/json",
-        // " Content-Type": "application/json",
       },
       responseType: ResponseType.json,
     );
@@ -33,24 +27,14 @@ class ApiClient {
     _http.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
-          print(options.path);
-          // options.headers['X-CSRFToken'] =
-          //     'IjkyMDNjMWUyMmRhMzMzODIyOTUwODVkZmQzNDFhZDZlYmEwZDg0YTci.YmRKPQ.jc-G06o03r2WEc1SpFhkM_F_93Y';
           handler.next(options);
         },
         onResponse: (Response response, ResponseInterceptorHandler handler) {
-          print(response);
-          // if (response.requestOptions.path != '/user/logout') {
-          //   int code = response.data['code'];
-          //   String msg = response.data['msg'];
-
-          // }
           handler.next(response);
         },
         onError: (DioError e, ErrorInterceptorHandler handler) {
           switch (e.type) {
             case DioErrorType.other:
-              //無context時改用current ex.S.of(context).* -> S.current.*
               e.error = 'networkRequestError';
               break;
             case DioErrorType.connectTimeout:

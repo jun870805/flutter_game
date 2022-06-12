@@ -1,0 +1,4 @@
+{
+  "env": "stable",
+  "apiUrl": "https://side-game.herokuapp.com/"
+}
