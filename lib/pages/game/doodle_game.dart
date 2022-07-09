@@ -102,7 +102,7 @@ class DoodleGame extends FlameGame
     final style = TextStyle(color: BasicPalette.white.color);
     final regular = TextPaint(style: style);
     add(
-      TextComponent(text: 'version:0.0.14', textRenderer: regular)
+      TextComponent(text: 'version:0.0.15', textRenderer: regular)
         ..anchor = Anchor.topCenter
         ..x = screenWidth / 2
         ..y = screenHeight - 32.0,
