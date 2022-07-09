@@ -21,7 +21,7 @@ Use flutter(flame) to development web game
 
 ## 使用素材 Use Material
 
-如有侵權請告知，將立即下架
+如有侵權請告知，將立即下架  
 If there is any infringement, please let us know, it will be removed immediately
 
 - [Time's up](https://zh.wikipedia.org/zh-hans/File:Times_up_small.png)
